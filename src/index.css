@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+  background-color: #020617;
+}
+
+body {
+  background-color: #020617;
+  background-image: radial-gradient(ellipse at top, #0f172a 0%, #020617 75%, #020617 100%);
+  @apply bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-teal-400/30 selection:text-teal-200;
+}
+
+/* Ensure Tailwind v3-style var(--tw-gradient-stops) works seamlessly in Tailwind CSS v4 */
+.from-slate-900 {
+  --tw-gradient-stops: var(--tw-gradient-from, #0f172a), var(--tw-gradient-via, #020617), var(--tw-gradient-to, #020617);
+}
+
+/* Utility to hide scrollbars cleanly in horizontal carousels */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
