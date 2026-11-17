@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import HeroAnimation from './components/HeroAnimation';
 import Hero from './components/Hero';
-import AboutModal from './components/AboutModal';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import ContactForm from './components/ContactForm';
@@ -29,6 +28,7 @@ export default function App() {
       <main className="relative z-10 space-y-20">
         <Hero
           isAboutOpen={isAboutOpen}
+          onOpenAbout={() => setIsAboutOpen(true)}
           onCloseAbout={() => setIsAboutOpen(false)}
         />
         <Projects />
@@ -36,12 +36,9 @@ export default function App() {
         <ContactForm />
       </main>
 
-      {/* Optional Standalone About Modal */}
-      <AboutModal isOpen={false} onClose={() => setIsAboutOpen(false)} />
-
       {/* Minimal Corporate Footer */}
       <footer className="relative z-10 border-t border-slate-800/80 backdrop-blur-md bg-slate-950/80 py-8 text-center text-xs text-slate-400">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p>
             © {CURRENT_YEAR} {personalInfo.name} • {personalInfo.education[0]?.institution}
           </p>

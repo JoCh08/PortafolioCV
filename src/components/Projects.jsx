@@ -22,7 +22,6 @@ export default function Projects() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
   const carouselRef = useRef(null);
-  const hoverIntervalRef = useRef(null);
 
   useEffect(() => {
     const node = sectionRef.current;
@@ -64,34 +63,6 @@ export default function Projects() {
     });
   }, []);
 
-  const handleArrowMouseEnter = useCallback(
-    (direction) => {
-      scrollCarouselByDirection(direction);
-      if (hoverIntervalRef.current) {
-        clearInterval(hoverIntervalRef.current);
-      }
-      hoverIntervalRef.current = setInterval(() => {
-        scrollCarouselByDirection(direction);
-      }, 650);
-    },
-    [scrollCarouselByDirection]
-  );
-
-  const handleArrowMouseLeave = useCallback(() => {
-    if (hoverIntervalRef.current) {
-      clearInterval(hoverIntervalRef.current);
-      hoverIntervalRef.current = null;
-    }
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      if (hoverIntervalRef.current) {
-        clearInterval(hoverIntervalRef.current);
-      }
-    };
-  }, []);
-
   const getTagIcon = (tag) => {
     const normalized = tag.toLowerCase();
     if (normalized.includes('react') || normalized.includes('vite')) {
@@ -122,7 +93,7 @@ export default function Projects() {
     <section
       id="proyectos"
       ref={sectionRef}
-      className={`py-24 max-w-[1440px] mx-auto px-6 lg:px-12 transition-all duration-700 ease-in-out transform ${
+      className={`py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ease-in-out transform ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >
@@ -168,12 +139,10 @@ export default function Projects() {
 
       {/* Carousel Wrapper with Vertically Centered Lateral Navigation Arrows */}
       <div className="relative group/carousel">
-        {/* Left Lateral Arrow (Vertically Centered, Hover & Click Scroll) */}
+        {/* Left Lateral Arrow (Vertically Centered, Click Scroll Only) */}
         <button
           type="button"
           onClick={() => scrollCarouselByDirection('prev')}
-          onMouseEnter={() => handleArrowMouseEnter('prev')}
-          onMouseLeave={handleArrowMouseLeave}
           className="flex items-center justify-center absolute -left-2 sm:-left-4 lg:-left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full backdrop-blur-xl bg-slate-900/85 border border-slate-700 hover:border-teal-400 hover:bg-teal-900/30 text-slate-200 hover:text-teal-400 shadow-xl transition-all duration-300 cursor-pointer hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(20,184,166,0.3)]"
           aria-label="Desplazar proyectos a la izquierda"
           title="Desplazar a la izquierda"
@@ -181,12 +150,10 @@ export default function Projects() {
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
-        {/* Right Lateral Arrow (Vertically Centered, Hover & Click Scroll) */}
+        {/* Right Lateral Arrow (Vertically Centered, Click Scroll Only) */}
         <button
           type="button"
           onClick={() => scrollCarouselByDirection('next')}
-          onMouseEnter={() => handleArrowMouseEnter('next')}
-          onMouseLeave={handleArrowMouseLeave}
           className="flex items-center justify-center absolute -right-2 sm:-right-4 lg:-right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full backdrop-blur-xl bg-slate-900/85 border border-slate-700 hover:border-teal-400 hover:bg-teal-900/30 text-slate-200 hover:text-teal-400 shadow-xl transition-all duration-300 cursor-pointer hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(20,184,166,0.3)]"
           aria-label="Desplazar proyectos a la derecha"
           title="Desplazar a la derecha"

@@ -59,7 +59,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className={`py-24 max-w-[1440px] mx-auto px-6 lg:px-12 transition-all duration-700 ease-in-out transform ${
+      className={`py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ease-in-out transform ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >

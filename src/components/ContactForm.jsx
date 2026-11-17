@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Mail, Send, MessageSquare, CheckCircle, FileText } from 'lucide-react';
+import { Mail, Send, MessageSquare, FileText } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import { personalInfo } from '../data/portfolioData';
 
 export default function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
   const [formData, setFormData] = useState({
@@ -32,11 +31,11 @@ export default function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', message: '' });
-    }, 4000);
+    const subject = encodeURIComponent(`Contacto desde Portafolio Web - ${formData.name}`);
+    const body = encodeURIComponent(
+      `Nombre: ${formData.name}\nCorreo: ${formData.email}\n\nMensaje:\n${formData.message}`
+    );
+    window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
   };
 
   const handleChange = (e) => {
@@ -47,7 +46,7 @@ export default function ContactForm() {
     <section
       id="contact"
       ref={sectionRef}
-      className={`py-24 max-w-[1440px] mx-auto px-6 lg:px-12 transition-all duration-700 ease-in-out transform ${
+      className={`py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ease-in-out transform ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >
@@ -133,82 +132,77 @@ export default function ContactForm() {
 
         {/* Contact Form (7 cols) */}
         <div className="lg:col-span-7 backdrop-blur-md bg-slate-800/35 border border-slate-700/70 rounded-3xl p-6 sm:p-8 relative">
-          {submitted ? (
-            <div className="py-12 flex flex-col items-center text-center space-y-4">
-              <CheckCircle className="w-12 h-12 text-teal-400 animate-bounce" />
-              <h4 className="text-xl font-bold text-slate-100">¡Mensaje enviado!</h4>
-              <p className="text-slate-300 text-sm max-w-xs">
-                Gracias por ponerte en contacto. Te responderé lo antes posible.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
-                >
-                  Nombre
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Tu nombre completo"
-                  className="w-full px-4 py-3 rounded-xl bg-slate-900/75 border border-slate-700/80 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400/50 transition-all text-sm"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
-                >
-                  Correo Electrónico
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="tu@correo.com"
-                  className="w-full px-4 py-3 rounded-xl bg-slate-900/75 border border-slate-700/80 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400/50 transition-all text-sm"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
-                >
-                  Mensaje
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="4"
-                  required
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Escribe tu mensaje aquí..."
-                  className="w-full px-4 py-3 rounded-xl bg-slate-900/75 border border-slate-700/80 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400/50 transition-all text-sm resize-none"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full py-3.5 px-6 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-semibold text-sm border border-teal-300/30 transition-all duration-300 hover:drop-shadow-[0_0_15px_rgba(20,184,166,0.3)] flex items-center justify-center space-x-2 cursor-pointer hover:-translate-y-0.5"
+          <form
+            action="https://formspree.io/f/TU_ID"
+            method="POST"
+            onSubmit={handleSubmit}
+            className="space-y-5"
+          >
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
               >
-                <Send className="w-4 h-4" />
-                <span>Enviar Mensaje</span>
-              </button>
-            </form>
-          )}
+                Nombre
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Tu nombre completo"
+                className="w-full px-4 py-3 rounded-xl bg-slate-900/75 border border-slate-700/80 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400/50 transition-all text-sm"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
+              >
+                Correo Electrónico
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="tu@correo.com"
+                className="w-full px-4 py-3 rounded-xl bg-slate-900/75 border border-slate-700/80 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400/50 transition-all text-sm"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="message"
+                className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
+              >
+                Mensaje
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                required
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Escribe tu mensaje aquí..."
+                className="w-full px-4 py-3 rounded-xl bg-slate-900/75 border border-slate-700/80 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400/50 transition-all text-sm resize-none"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3.5 px-6 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-semibold text-sm border border-teal-300/30 transition-all duration-300 hover:drop-shadow-[0_0_15px_rgba(20,184,166,0.3)] flex items-center justify-center space-x-2 cursor-pointer hover:-translate-y-0.5"
+            >
+              <Send className="w-4 h-4" />
+              <span>Enviar Mensaje</span>
+            </button>
+          </form>
         </div>
       </div>
     </section>
