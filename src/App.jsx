@@ -13,7 +13,7 @@ export default function App() {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   return (
-    <div className="relative bg-slate-950 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-teal-400/30 selection:text-teal-200 overflow-x-hidden">
+    <div className="relative bg-slate-950 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-teal-400/30 selection:text-teal-200 overflow-x-clip">
       {/* Interactive Ambient Canvas */}
       <HeroAnimation />
 
@@ -37,7 +37,7 @@ export default function App() {
       </main>
 
       {/* Minimal Corporate Footer */}
-      <footer className="relative z-10 border-t border-slate-800/80 backdrop-blur-md bg-slate-950/80 py-8 text-center text-xs text-slate-400">
+      <footer className="relative z-10 snap-end border-t border-slate-800/80 backdrop-blur-md bg-slate-950/80 py-8 text-center text-xs text-slate-400">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p>
             © {CURRENT_YEAR} {personalInfo.name} • {personalInfo.education[0]?.institution}

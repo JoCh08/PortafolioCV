@@ -3,12 +3,15 @@
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y proximity;
+  scroll-padding-top: 5rem;
   background-color: #020617;
+  overflow-x: clip;
 }
 
 body {
   background-color: #020617;
   background-image: radial-gradient(ellipse at top, #0f172a 0%, #020617 75%, #020617 100%);
+  overflow-x: clip;
   @apply bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-teal-400/30 selection:text-teal-200;
 }
 
