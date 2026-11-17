@@ -1,5 +1,14 @@
 import React, { useEffect } from 'react';
-import { ArrowLeft, GraduationCap, MapPin, Mail, Cpu, BookOpen, Download } from 'lucide-react';
+import {
+  ArrowLeft,
+  GraduationCap,
+  MapPin,
+  Mail,
+  Cpu,
+  BookOpen,
+  Download,
+  CheckCircle2,
+} from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import { personalInfo } from '../data/portfolioData';
 
@@ -106,19 +115,34 @@ export default function AboutModal({ isOpen, onClose }) {
             </div>
           </div>
 
-          {/* Detailed Bio */}
+          {/* Detailed Bio & Contributions */}
           <div className="space-y-6 text-slate-300 text-sm leading-relaxed sm:text-base border-t border-slate-800/80 pt-5">
             <div>
               <h3 className="text-xs uppercase tracking-wider text-teal-400 font-semibold mb-2 flex items-center">
                 <BookOpen className="w-4 h-4 mr-2" />
-                Trayectoria & Biografía
+                Lo que puedo aportar & Biografía
               </h3>
-              <p className="interactive-card backdrop-blur-xl bg-slate-950/20 p-5 rounded-3xl border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20 text-sm leading-relaxed sm:text-base text-slate-300">
-                {personalInfo.detailedBio}
-              </p>
+              <div className="interactive-card backdrop-blur-xl bg-slate-950/20 p-5 rounded-3xl border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20 space-y-4">
+                <p className="text-sm leading-relaxed sm:text-base text-slate-300">
+                  {personalInfo.detailedBio}
+                </p>
+                {personalInfo.contributions && (
+                  <ul className="space-y-2 pt-2 border-t border-slate-800/80">
+                    {personalInfo.contributions.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-center space-x-2 text-xs sm:text-sm text-slate-200"
+                      >
+                        <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
 
-            {/* Education & Focus */}
+            {/* Education & Languages */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="interactive-card backdrop-blur-xl bg-slate-950/20 p-5 rounded-3xl border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20">
                 <h4 className="text-xs uppercase tracking-wider text-teal-400 font-semibold mb-3 flex items-center">
@@ -143,7 +167,7 @@ export default function AboutModal({ isOpen, onClose }) {
                 </h4>
                 <div className="space-y-2.5">
                   {personalInfo.languages?.map((lang) => (
-                    <div key={lang.name} className="space-y-0.5">
+                    <div key={lang.name || lang.label} className="space-y-0.5">
                       <div className="flex items-center justify-between text-xs sm:text-sm">
                         <span className="font-semibold text-slate-100">
                           {lang.flag} {lang.name}
