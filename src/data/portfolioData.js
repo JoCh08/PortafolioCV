@@ -3,10 +3,10 @@ export const personalInfo = {
   title: "Systems Engineering Student & Junior Full-Stack Developer",
   availability: "Disponible para oportunidades Junior & Prácticas",
   shortBio:
-  "Estudiante avanzado de Ingeniería en Ciencias y Sistemas (USAC) y desarrollador Full-Stack Junior. Especializado en APIs asíncronas con FastAPI, interfaces dinámicas en React y despliegues reproducibles con Docker.",
+    "Desarrollo aplicaciones web Full Stack escalables utilizando React, FastAPI y PostgreSQL. Me enfoco en crear arquitecturas limpias, rendimiento óptimo y experiencias de usuario intuitivas.",
 
-detailedBio:
-  "Estudiante de Ingeniería en Ciencias y Sistemas en la Universidad de San Carlos de Guatemala (USAC) con enfoque en desarrollo web full-stack y modelado de software. Construyo aplicaciones combinando arquitecturas backend eficientes en Python (FastAPI) y bases de datos relacionales (PostgreSQL) con interfaces web reactivas en React y Tailwind CSS. Cuento con bases sólidas en C++, contenedores Docker y flujos CI/CD con GitHub Actions, orientado a escribir código mantenible, modular y documentado.",
+  detailedBio:
+    "Desarrollo aplicaciones web Full Stack escalables utilizando React, FastAPI y PostgreSQL. Como estudiante avanzado de Ingeniería en Ciencias y Sistemas en la USAC, me enfoco en crear arquitecturas limpias, rendimiento óptimo y experiencias de usuario intuitivas, respaldadas por contenedores Docker, bases sólidas en C++ y flujos CI/CD con GitHub Actions.",
   location: "Ciudad de Guatemala • Remoto/Presencial",
   email: "josue.ch997@gmail.com",
   github: "https://github.com/JosueCh97",
@@ -39,72 +39,116 @@ detailedBio:
       focus: "Arquitectura de Software, Estructuras de Datos y Sistemas Distribuidos",
     },
   ],
+  languages: [
+    {
+      flag: "🇪🇸",
+      name: "Español",
+      level: "Nativo",
+      detail: "Comunicación fluida, redacción técnica y documentación de arquitectura.",
+    },
+    {
+      flag: "🇺🇸",
+      name: "Inglés",
+      level: "Intermedio (B1/B2)",
+      detail: "Capacidad para leer documentación técnica y consumir recursos en inglés.",
+    },
+  ],
 };
 
-export const skills = [
-  {
-    category: "Frontend",
-    description: "Interfaces reactivas, accesibles y sistemas de diseño modernos.",
-    items: [
-      { name: "React", level: "Avanzado", percentage: 90 },
-      { name: "Tailwind CSS", level: "Avanzado", percentage: 90 },
-      { name: "JavaScript / ES6+", level: "Avanzado", percentage: 85 },
-      { name: "HTML5 / CSS3", level: "Avanzado", percentage: 92 },
-    ],
-  },
-  {
-    category: "Backend & Sistemas",
-    description: "Diseño de APIs RESTful asíncronas, lógica de negocio y rendimiento.",
-    items: [
-      { name: "FastAPI", level: "Avanzado", percentage: 85 },
-      { name: "Python", level: "Avanzado", percentage: 88 },
-      { name: "C++", level: "Intermedio", percentage: 75 },
-      { name: "PostgreSQL", level: "Intermedio", percentage: 78 },
-    ],
-  },
-  {
-    category: "Herramientas & DevOps",
-    description: "Entornos reproducibles, control de versiones y flujo de despliegue.",
-    items: [
-      { name: "Docker", level: "Intermedio", percentage: 76 },
-      { name: "Git & GitHub", level: "Avanzado", percentage: 88 },
-      { name: "Vite", level: "Avanzado", percentage: 85 },
-      { name: "Linux / Bash", level: "Intermedio", percentage: 78 },
-    ],
-  },
-  {
-    category: "Habilidades Blandas",
-    description: "Competencias interpersonales, liderazgo técnico y metodologías ágiles.",
-    items: [
-      { name: "Comunicación Efectiva", level: "Avanzado", percentage: 80 },
-      { name: "Trabajo en Equipo", level: "Avanzado", percentage: 75 },
-      { name: "Resolución de Problemas", level: "Avanzado", percentage: 90 },
-      { name: "Pensamiento Crítico & Adaptabilidad", level: "Avanzado", percentage: 80 },
-    ],
-  },
-];
+export const skills = {
+  hardSkills: [
+    {
+      category: "Frontend",
+      description: "Interfaces reactivas, accesibles y sistemas de diseño modernos.",
+      items: [
+        { name: "React", tag: "UI & Hooks" },
+        { name: "Tailwind CSS", tag: "Design System" },
+        { name: "JavaScript (ES6+)", tag: "Core Web" },
+        { name: "HTML5 & CSS3", tag: "Semántica & Layout" },
+      ],
+    },
+    {
+      category: "Backend",
+      description: "Diseño de APIs RESTful asíncronas, lógica de negocio y alto rendimiento.",
+      items: [
+        { name: "FastAPI", tag: "Python Async" },
+        { name: "Node.js", tag: "Runtime JS" },
+        { name: "Python", tag: "Backend & Scripts" },
+        { name: "C++", tag: "Sistemas & Algoritmos" },
+      ],
+    },
+    {
+      category: "Bases de Datos",
+      description: "Modelado relacional, integridad transaccional y consultas optimizadas.",
+      items: [
+        { name: "PostgreSQL", tag: "Relacional" },
+        { name: "SQL Avanzado", tag: "Consultas & Índices" },
+        { name: "Modelado ER", tag: "Normalización" },
+        { name: "ORM / SQLAlchemy", tag: "Persistencia" },
+      ],
+    },
+    {
+      category: "Herramientas",
+      description: "Entornos reproducibles, control de versiones y automatización CI/CD.",
+      items: [
+        { name: "Docker", tag: "Contenedores" },
+        { name: "Git & GitHub", tag: "Gitflow & CI/CD" },
+        { name: "Linux / Bash", tag: "Entorno Servidor" },
+        { name: "Vite", tag: "Build Tooling" },
+      ],
+    },
+  ],
+  softSkills: [
+    {
+      name: "Resolución de problemas",
+      summary: "Diagnóstico estructurado de cuellos de botella y diseño de soluciones eficientes.",
+    },
+    {
+      name: "Trabajo en equipo",
+      summary: "Colaboración efectiva en entornos ágiles, comunicación clara y revisión de código.",
+    },
+    {
+      name: "Adaptabilidad",
+      summary: "Aprendizaje autónomo y rápida adopción de nuevos frameworks y arquitecturas.",
+    },
+    {
+      name: "Pensamiento analítico",
+      summary: "Descomposición de requerimientos complejos en módulos mantenibles y escalables.",
+    },
+  ],
+};
 
 export const projects = [
   {
     id: "proj-1",
-    title: "High-Performance Data Engine",
-    subtitle: "Procesamiento Distribuido & Bindings Nativos",
+    title: "EduConnect — Gestión de Sesiones",
+    subtitle: "Plataforma Académica & Trazabilidad Full-Stack",
     description:
-      "Motor de procesamiento de datos desarrollado en C++ con bindings de Python y contenedorización completa en Docker para ejecución de pipelines analíticos de baja latencia.",
-    tags: ["C++", "Docker", "Python", "Linux"],
+      "Sistema integral para la coordinación de tutorías universitarias, historial de sesiones y evaluación continua de desempeño.",
+    problem: "Falta de trazabilidad en las tutorías y calificaciones.",
+    solution:
+      "Backend en FastAPI con endpoints seguros para historial y sistema de rating (HU-038).",
+    results:
+      "Mejora en el seguimiento académico y automatización de correos de cancelación.",
+    tags: ["React", "FastAPI", "PostgreSQL", "Docker"],
     repoUrl: "https://github.com/example/cpp-data-engine",
     demoUrl: "https://example.com/demo-engine",
     imageUrl:
       "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=900",
     featured: true,
-    metrics: "Pipelines en C++17 • Contenedores ligeros",
+    metrics: "API Asíncrona REST • Trazabilidad HU-038",
   },
   {
     id: "proj-2",
     title: "Cloud Analytics Platform",
     subtitle: "Dashboard Full-Stack & Telemetría en Tiempo Real",
     description:
-      "Plataforma web para visualización de métricas operativas con backend asíncrono en FastAPI, persistencia en PostgreSQL y panel interactivo construido con React y Tailwind CSS.",
+      "Plataforma web para visualización de métricas operativas con backend asíncrono en FastAPI, persistencia en PostgreSQL y panel interactivo en React.",
+    problem: "Dispersión de métricas operativas y lentitud en consultas manuales de reportes.",
+    solution:
+      "Arquitectura Full-Stack con agregación asíncrona en FastAPI, consultas indexadas en PostgreSQL y UI reactiva en React.",
+    results:
+      "Centralización de indicadores clave en tiempo real y reducción en tiempos de respuesta.",
     tags: ["React", "FastAPI", "Tailwind CSS", "PostgreSQL"],
     repoUrl: "https://github.com/example/cloud-analytics",
     demoUrl: "https://example.com/cloud-analytics",
@@ -118,7 +162,12 @@ export const projects = [
     title: "Microservices API Gateway",
     subtitle: "Seguridad, Enrutamiento & Control de Tráfico",
     description:
-      "Gateway ligero de servicios con autenticación basada en JWT, limitación de tasa de peticiones (rate limiting) y despliegue reproducible mediante Docker Compose y flujos CI/CD.",
+      "Gateway ligero de servicios con autenticación basada en JWT, limitación de tasa de peticiones y despliegue reproducible con Docker.",
+    problem: "Exposición directa de microservicios sin control unificado de sesiones ni límite de peticiones.",
+    solution:
+      "Implementación de middleware de validación JWT, rate-limiting y orquestación mediante Docker Compose.",
+    results:
+      "Estandarización de seguridad en los endpoints y despliegues reproducibles en entornos locales y CI/CD.",
     tags: ["FastAPI", "Docker", "Python", "Git"],
     repoUrl: "https://github.com/example/api-gateway",
     demoUrl: "https://example.com/api-gateway",
@@ -132,7 +181,12 @@ export const projects = [
     title: "Interactive Portfolio Architecture",
     subtitle: "Ingeniería Frontend & Diseño Corporativo Minimalista",
     description:
-      "Aplicación web interactiva con motor de partículas en HTML5 Canvas, transiciones multicapa sin recarga y arquitectura de componentes estilizados con Tailwind CSS v4.",
+      "Aplicación web interactiva con motor de partículas en HTML5 Canvas, transiciones multicapa sin recarga y arquitectura en Tailwind CSS v4.",
+    problem: "Portafolios estáticos tradicionales que no evidencian habilidades reales de ingeniería UI/UX ni rendimiento.",
+    solution:
+      "Motor personalizado en HTML5 Canvas a 60 FPS con detección colisional DOM y arquitectura responsiva en React 19 y Tailwind v4.",
+    results:
+      "Carga instantánea, 0 errores de linter y experiencia de usuario fluida con soporte accesible WCAG 2.2.",
     tags: ["React", "Tailwind CSS", "Vite"],
     repoUrl: "https://github.com/example/portfolio",
     demoUrl: "https://example.com/portfolio",

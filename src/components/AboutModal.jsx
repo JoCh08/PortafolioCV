@@ -139,12 +139,23 @@ export default function AboutModal({ isOpen, onClose }) {
               <div className="interactive-card backdrop-blur-xl bg-slate-950/20 p-5 rounded-3xl border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20">
                 <h4 className="text-xs uppercase tracking-wider text-teal-400 font-semibold mb-3 flex items-center">
                   <Cpu className="w-4 h-4 mr-2" />
-                  Especialización
+                  Idiomas
                 </h4>
-                <p className="text-base font-bold text-slate-100">Arquitectura Full-Stack</p>
-                <p className="text-xs text-slate-400 mt-1">
-                  Desarrollo de software moderno con React, FastAPI, Python y C++.
-                </p>
+                <div className="space-y-2.5">
+                  {personalInfo.languages?.map((lang) => (
+                    <div key={lang.name} className="space-y-0.5">
+                      <div className="flex items-center justify-between text-xs sm:text-sm">
+                        <span className="font-semibold text-slate-100">
+                          {lang.flag} {lang.name}
+                        </span>
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-teal-300 font-medium">
+                          {lang.level}
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-400 leading-snug">{lang.detail}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

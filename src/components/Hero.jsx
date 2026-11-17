@@ -386,27 +386,33 @@ export default function Hero({
                       ))}
                     </div>
 
-                    {/* Practical Focus Card */}
+                    {/* Languages & Technical Communication Card */}
                     <div className="interactive-card rounded-3xl backdrop-blur-xl bg-slate-950/20 border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20 p-6 flex flex-col justify-between space-y-4 transition-all duration-300">
-                      <div className="space-y-2.5">
+                      <div className="space-y-3">
                         <div className="flex items-center space-x-2.5 text-xs uppercase tracking-widest text-teal-400 font-semibold">
                           <Cpu className="w-4 h-4" />
-                          <span>Enfoque de Ingeniería</span>
+                          <span>Idiomas & Comunicación</span>
                         </div>
-                        <p className="text-lg font-bold text-slate-100 tracking-tight">
-                          Desarrollo Full-Stack & Sistemas
-                        </p>
-                        <p className="text-xs sm:text-sm text-slate-300/90 leading-relaxed">
-                          Construcción de proyectos integrales aplicando arquitectura limpia,
-                          estructuras de datos eficientes, APIs modernas en Python/FastAPI e
-                          interfaces fluidas en React.
-                        </p>
-                      </div>
-
-                      <div className="pt-3 flex items-center justify-between border-t border-slate-800/80">
-                        <span className="text-xs text-slate-400 font-medium">
-                          USAC • Ingeniería en Sistemas
-                        </span>
+                        <div className="space-y-2.5">
+                          {personalInfo.languages?.map((lang) => (
+                            <div
+                              key={lang.name}
+                              className="p-2.5 rounded-2xl bg-slate-900/40 border border-slate-800/80 space-y-1"
+                            >
+                              <div className="flex items-center justify-between text-xs sm:text-sm">
+                                <span className="font-bold text-slate-100">
+                                  {lang.flag} {lang.name}
+                                </span>
+                                <span className="text-[11px] px-2 py-0.5 rounded-md bg-teal-400/10 border border-teal-400/25 text-teal-300 font-semibold">
+                                  {lang.level}
+                                </span>
+                              </div>
+                              <p className="text-[11px] text-slate-400 leading-snug">
+                                {lang.detail}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>

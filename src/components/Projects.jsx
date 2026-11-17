@@ -215,8 +215,8 @@ export default function Projects() {
                   </div>
                 </div>
 
-                {/* Project Metadata & Description */}
-                <div className="space-y-3">
+                {/* Project Metadata & Problem/Solution/Results Case Study */}
+                <div className="space-y-3.5">
                   <span className="text-xs font-medium uppercase tracking-wider text-teal-400 block">
                     {project.subtitle || 'Arquitectura de Software'}
                   </span>
@@ -226,6 +226,29 @@ export default function Projects() {
                   <p className="text-slate-300/90 text-sm leading-relaxed">
                     {project.description}
                   </p>
+
+                  {project.problem && project.solution && project.results && (
+                    <div className="mt-3 pt-3 border-t border-slate-800/80 space-y-2 text-xs leading-relaxed">
+                      <div className="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+                        <span className="font-semibold text-amber-300/90 uppercase tracking-wider text-[10px] block mb-0.5">
+                          Problema
+                        </span>
+                        <p className="text-slate-300">{project.problem}</p>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
+                        <span className="font-semibold text-teal-400 uppercase tracking-wider text-[10px] block mb-0.5">
+                          Solución Técnica
+                        </span>
+                        <p className="text-slate-300">{project.solution}</p>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-emerald-950/20 border border-emerald-500/25">
+                        <span className="font-semibold text-emerald-400 uppercase tracking-wider text-[10px] block mb-0.5">
+                          Resultado & Impacto
+                        </span>
+                        <p className="text-slate-200">{project.results}</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
