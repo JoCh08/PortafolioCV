@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { ArrowLeft, GraduationCap, MapPin, Mail, Cpu, BookOpen } from 'lucide-react';
+import { ArrowLeft, GraduationCap, MapPin, Mail, Cpu, BookOpen, Download } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import { personalInfo } from '../data/portfolioData';
 
 export default function AboutModal({ isOpen, onClose }) {
@@ -22,7 +23,7 @@ export default function AboutModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto backdrop-blur-md bg-slate-900/80 animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto backdrop-blur-md bg-slate-950/75 animate-fade-in">
       {/* Backdrop overlay listener */}
       <div
         className="fixed inset-0 cursor-pointer"
@@ -30,21 +31,21 @@ export default function AboutModal({ isOpen, onClose }) {
         aria-hidden="true"
       />
 
-      <div className="relative w-full max-w-7xl mx-auto px-6 lg:px-12 z-10 my-8">
-        <div className="relative w-full max-w-3xl mx-auto bg-slate-900/95 border border-slate-800 rounded-3xl shadow-2xl p-6 sm:p-10 overflow-hidden">
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 my-8">
+        <div className="interactive-card relative w-full backdrop-blur-xl bg-slate-950/20 border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20 rounded-3xl p-6 sm:p-10 overflow-hidden transition-all duration-300">
           {/* Top subtle highlight */}
           <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-teal-400/0 via-teal-400/50 to-teal-400/0" />
 
-          {/* Minimalist Flat-Ghost Return Button in Top-Left Corner */}
+          {/* Subtle Ghost Return Arrow (← Regresar) in Top-Left Corner */}
           <div className="flex items-center justify-between mb-6">
             <button
               type="button"
               onClick={onClose}
-              className="text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 rounded-full p-2 transition-all cursor-pointer"
-              aria-label="Volver al inicio"
-              title="Volver al inicio"
+              className="group inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-teal-300 hover:bg-slate-800/40 transition-all cursor-pointer"
+              aria-label="Regresar a la portada"
             >
-              <ArrowLeft className="w-5 h-5" />
+              <ArrowLeft className="w-4 h-4 text-teal-400 transition-transform duration-300 group-hover:-translate-x-1" />
+              <span>Regresar</span>
             </button>
 
             <span className="text-xs uppercase tracking-widest text-teal-400 font-semibold">
@@ -53,37 +54,73 @@ export default function AboutModal({ isOpen, onClose }) {
           </div>
 
           {/* Modal Header */}
-          <div className="flex items-center space-x-4 mb-6">
-            <img
-              src={personalInfo.avatarUrl}
-              alt={personalInfo.name}
-              className="w-16 h-16 rounded-full object-cover border-2 border-teal-400/30 shadow-md"
-            />
-            <div>
-              <h2 className="text-2xl font-bold text-slate-100">{personalInfo.name}</h2>
-              <p className="text-teal-400 text-sm font-medium">{personalInfo.title}</p>
-              <div className="flex items-center text-xs text-slate-400 mt-1">
-                <MapPin className="w-3.5 h-3.5 mr-1 text-teal-400" />
-                <span>{personalInfo.location}</span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div className="flex items-center space-x-4">
+              <img
+                src={personalInfo.avatarUrl}
+                alt={personalInfo.name}
+                className="w-16 h-16 rounded-full object-cover border-2 border-teal-400/30 shadow-md"
+              />
+              <div>
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-100">
+                  {personalInfo.name}
+                </h2>
+                <p className="text-teal-400 text-xs sm:text-sm font-medium">{personalInfo.title}</p>
+                <div className="flex items-center text-xs text-slate-400 mt-1">
+                  <MapPin className="w-3.5 h-3.5 mr-1 text-teal-400" />
+                  <span>{personalInfo.location}</span>
+                </div>
               </div>
+            </div>
+
+            {/* Key Resources with transient 1.5s highlight pulse */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <a
+                href={personalInfo.cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+                className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500/10 to-teal-500/10 hover:from-emerald-500/20 hover:to-teal-500/20 border border-emerald-500/30 text-xs font-semibold text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.1)] animate-[pulse_1.5s_ease-in-out_2] ring-1 ring-emerald-400/50 transition-all duration-300"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Ver CV</span>
+              </a>
+              <a
+                href={personalInfo.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-slate-900/40 hover:bg-slate-800/50 border border-slate-800/80 text-xs font-medium text-slate-300 hover:text-teal-300 animate-[pulse_1.5s_ease-in-out_2] ring-1 ring-teal-400/35 transition-all"
+              >
+                <GithubIcon className="w-4 h-4" />
+                <span>GitHub</span>
+              </a>
+              <a
+                href={personalInfo.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-slate-900/40 hover:bg-slate-800/50 border border-slate-800/80 text-xs font-medium text-slate-300 hover:text-teal-300 animate-[pulse_1.5s_ease-in-out_2] ring-1 ring-teal-400/35 transition-all"
+              >
+                <LinkedinIcon className="w-4 h-4" />
+                <span>LinkedIn</span>
+              </a>
             </div>
           </div>
 
           {/* Detailed Bio */}
-          <div className="space-y-6 text-slate-300 text-sm leading-relaxed border-t border-slate-800/80 pt-5">
+          <div className="space-y-6 text-slate-300 text-sm leading-relaxed sm:text-base border-t border-slate-800/80 pt-5">
             <div>
               <h3 className="text-xs uppercase tracking-wider text-teal-400 font-semibold mb-2 flex items-center">
                 <BookOpen className="w-4 h-4 mr-2" />
                 Trayectoria & Biografía
               </h3>
-              <p className="bg-slate-800/40 p-4 rounded-2xl border border-slate-700/70 text-slate-300">
+              <p className="interactive-card backdrop-blur-xl bg-slate-950/20 p-5 rounded-3xl border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20 text-sm leading-relaxed sm:text-base text-slate-300">
                 {personalInfo.detailedBio}
               </p>
             </div>
 
             {/* Education & Focus */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-slate-800/40 p-4 rounded-2xl border border-slate-700/70">
+              <div className="interactive-card backdrop-blur-xl bg-slate-950/20 p-5 rounded-3xl border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20">
                 <h4 className="text-xs uppercase tracking-wider text-teal-400 font-semibold mb-3 flex items-center">
                   <GraduationCap className="w-4 h-4 mr-2" />
                   Educación
@@ -99,7 +136,7 @@ export default function AboutModal({ isOpen, onClose }) {
                 ))}
               </div>
 
-              <div className="bg-slate-800/40 p-4 rounded-2xl border border-slate-700/70">
+              <div className="interactive-card backdrop-blur-xl bg-slate-950/20 p-5 rounded-3xl border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20">
                 <h4 className="text-xs uppercase tracking-wider text-teal-400 font-semibold mb-3 flex items-center">
                   <Cpu className="w-4 h-4 mr-2" />
                   Especialización

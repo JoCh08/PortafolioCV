@@ -27,7 +27,7 @@ export default function Navbar({ isAboutOpen, onOpenAbout, onCloseAbout }) {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-xl bg-slate-950/75 border-b border-slate-800/80 transition-all duration-300">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Left: Corporate Identity */}
         <a
           href="#hero"
@@ -54,14 +54,14 @@ export default function Navbar({ isAboutOpen, onOpenAbout, onCloseAbout }) {
           ))}
         </nav>
 
-        {/* Right: Balanced Action Group */}
+        {/* Right: Desktop Action Group (hidden on mobile) */}
         <div className="hidden md:flex items-center space-x-4 shrink-0">
           {/* Ver CV Button */}
           <a
             href={personalInfo.cvUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 text-xs font-medium px-4 py-2.5 rounded-xl border border-slate-700 hover:border-teal-400 hover:bg-teal-900/20 text-slate-200 hover:text-teal-300 transition-all duration-300 hover:drop-shadow-[0_0_15px_rgba(20,184,166,0.3)]"
+            className="hidden md:flex items-center space-x-2 text-xs font-medium px-4 py-2.5 rounded-xl border border-slate-700 hover:border-teal-400 hover:bg-teal-900/20 text-slate-200 hover:text-teal-300 transition-all duration-300 hover:drop-shadow-[0_0_15px_rgba(20,184,166,0.3)]"
           >
             <FileText className="w-3.5 h-3.5 text-teal-400" />
             <span>Ver CV</span>
@@ -71,7 +71,7 @@ export default function Navbar({ isAboutOpen, onOpenAbout, onCloseAbout }) {
           <button
             type="button"
             onClick={handleAboutClick}
-            className={`inline-flex items-center space-x-2 text-xs font-medium px-4 py-2.5 rounded-xl border transition-all duration-300 cursor-pointer hover:drop-shadow-[0_0_15px_rgba(20,184,166,0.3)] ${
+            className={`hidden md:flex items-center space-x-2 text-xs font-medium px-4 py-2.5 rounded-xl border transition-all duration-300 cursor-pointer hover:drop-shadow-[0_0_15px_rgba(20,184,166,0.3)] ${
               isAboutOpen
                 ? 'bg-teal-400/20 text-teal-200 border-teal-400/60'
                 : 'backdrop-blur-md bg-teal-400/10 border-teal-400/30 text-teal-300 hover:bg-teal-900/30 hover:border-teal-400'
@@ -91,45 +91,22 @@ export default function Navbar({ isAboutOpen, onOpenAbout, onCloseAbout }) {
           </button>
         </div>
 
-        {/* Mobile Controls */}
-        <div className="flex md:hidden items-center space-x-2.5">
-          <a
-            href={personalInfo.cvUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center space-x-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border border-slate-700 hover:border-teal-400 hover:bg-teal-900/20 text-slate-200 hover:text-teal-300 transition-all"
-          >
-            <FileText className="w-3.5 h-3.5 text-teal-400" />
-            <span>Ver CV</span>
-          </a>
-
-          <button
-            type="button"
-            onClick={handleAboutClick}
-            className={`inline-flex items-center space-x-1 text-xs font-medium px-3 py-1.5 rounded-lg border transition-all duration-300 cursor-pointer ${
-              isAboutOpen
-                ? 'bg-teal-400/20 text-teal-200 border-teal-400/50'
-                : 'backdrop-blur-md bg-teal-400/10 border-teal-400/30 text-teal-300'
-            }`}
-          >
-            {isAboutOpen ? <ArrowLeft className="w-3.5 h-3.5" /> : <User className="w-3.5 h-3.5" />}
-            <span>{isAboutOpen ? 'Inicio' : 'Sobre mí'}</span>
-          </button>
-
+        {/* Mobile Controls: ONLY Hamburger Menu Icon on the right */}
+        <div className="flex md:hidden items-center">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-slate-300 hover:text-teal-400 p-1.5 rounded-lg hover:bg-slate-800/60 focus:outline-none cursor-pointer"
+            className="text-slate-300 hover:text-teal-400 p-2 rounded-xl hover:bg-slate-800/60 focus:outline-none cursor-pointer transition-colors"
             aria-label="Alternar menú"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Dropdown */}
+      {/* Mobile Dropdown (contains Nav Links + Sobre mí & Ver CV) */}
       {mobileMenuOpen && (
-        <div className="md:hidden backdrop-blur-xl bg-slate-900/95 border-b border-slate-800/80 px-6 pt-2 pb-4 space-y-1.5">
+        <div className="md:hidden backdrop-blur-xl bg-slate-900/95 border-b border-slate-800/80 px-6 pt-3 pb-5 space-y-2">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -143,6 +120,37 @@ export default function Navbar({ isAboutOpen, onOpenAbout, onCloseAbout }) {
               {link.name}
             </a>
           ))}
+
+          <div className="pt-2 mt-2 border-t border-slate-800/80 flex flex-col gap-2">
+            <button
+              type="button"
+              onClick={handleAboutClick}
+              className="w-full flex items-center justify-center space-x-2 px-4 py-2.5 rounded-xl border border-teal-400/30 bg-teal-400/10 text-teal-300 text-sm font-medium transition-all cursor-pointer"
+            >
+              {isAboutOpen ? (
+                <>
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>Volver al Inicio</span>
+                </>
+              ) : (
+                <>
+                  <User className="w-4 h-4" />
+                  <span>Sobre mí</span>
+                </>
+              )}
+            </button>
+
+            <a
+              href={personalInfo.cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full flex items-center justify-center space-x-2 px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800/50 text-slate-200 hover:text-teal-300 text-sm font-medium transition-all"
+            >
+              <FileText className="w-4 h-4 text-teal-400" />
+              <span>Ver CV</span>
+            </a>
+          </div>
         </div>
       )}
     </header>
