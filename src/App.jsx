@@ -13,7 +13,7 @@ export default function App() {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   return (
-    <div className="relative bg-slate-950 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-teal-400/30 selection:text-teal-200 overflow-x-clip">
+    <div className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-proximity scroll-smooth bg-slate-950 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-slate-950 text-slate-100 font-sans antialiased selection:bg-teal-400/30 selection:text-teal-200">
       {/* Interactive Ambient Canvas */}
       <HeroAnimation />
 

@@ -100,7 +100,7 @@ export default function HeroAnimation() {
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('mouseout', handleMouseLeave, { passive: true });
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, { capture: true, passive: true });
 
     // Base palette: jade, teal, emerald and slate
     const palette = [
@@ -342,7 +342,7 @@ export default function HeroAnimation() {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('mouseout', handleMouseLeave);
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll, { capture: true });
       window.removeEventListener('resize', handleResize);
     };
   }, []);

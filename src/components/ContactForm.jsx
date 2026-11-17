@@ -46,25 +46,36 @@ export default function ContactForm() {
     <section
       id="contact"
       ref={sectionRef}
-      className={`min-h-screen snap-start flex flex-col justify-center py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ease-in-out transform ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}
+      className="snap-start min-h-screen w-full flex flex-col justify-center py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
     >
-      {/* Section Header */}
-      <div className="text-center space-y-3 mb-14">
-        <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full backdrop-blur-md bg-slate-800/50 border border-slate-700/70 text-xs font-medium uppercase tracking-wider text-teal-400">
-          <MessageSquare className="w-3.5 h-3.5" />
-          <span>Contacto Directo</span>
+      <div
+        className={`w-full transition-all duration-[800ms] ease-out ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+        }`}
+      >
+        {/* Section Header (Stagger 1) */}
+        <div
+          className={`text-center space-y-3 mb-14 transition-all duration-[800ms] delay-100 ease-out ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}
+        >
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full backdrop-blur-md bg-slate-800/50 border border-slate-700/70 text-xs font-medium uppercase tracking-wider text-teal-400">
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span>Contacto Directo</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-100">
+            ¿Hablamos sobre tu próximo proyecto?
+          </h2>
+          <p className="text-slate-400 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
+            Envíame un mensaje directo o conéctate conmigo a través de mis canales profesionales.
+          </p>
         </div>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-100">
-          ¿Hablamos sobre tu próximo proyecto?
-        </h2>
-        <p className="text-slate-400 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-          Envíame un mensaje directo o conéctate conmigo a través de mis canales profesionales.
-        </p>
-      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div
+          className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start transition-all duration-[800ms] delay-200 ease-out ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}
+        >
         {/* Contact Info & Social Shortcuts (5 cols) */}
         <div className="lg:col-span-5 space-y-6 backdrop-blur-md bg-slate-800/35 border border-slate-700/70 rounded-3xl p-6 sm:p-8">
           <h3 className="text-xl font-bold tracking-tight text-slate-100">Canales de Contacto</h3>
@@ -203,6 +214,7 @@ export default function ContactForm() {
               <span>Enviar Mensaje</span>
             </button>
           </form>
+        </div>
         </div>
       </div>
     </section>

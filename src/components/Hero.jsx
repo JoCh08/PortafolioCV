@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   ArrowDown,
   ArrowLeft,
   ArrowRight,
   BookOpen,
+  CheckCircle2,
   Code2,
   Cpu,
   Download,
@@ -24,9 +25,28 @@ export default function Hero({
   onCloseAbout,
 }) {
   const [internalAboutOpen, setInternalAboutOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
 
   const isAboutOpen =
     typeof controlledIsAboutOpen === 'boolean' ? controlledIsAboutOpen : internalAboutOpen;
+
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   const handleOpenAbout = useCallback(() => {
     if (onOpenAbout) {
@@ -82,13 +102,17 @@ export default function Hero({
   return (
     <section
       id="hero"
-      className="relative min-h-screen snap-start flex items-center justify-center pt-24 pb-20 overflow-hidden"
+      ref={sectionRef}
+      className="relative snap-start min-h-screen w-full flex flex-col justify-center py-24 overflow-hidden"
     >
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        className={`relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-[800ms] ease-out ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+        }`}
+      >
         <div className="relative grid grid-cols-1 items-center">
           {/* =========================================================
               CAPA 1: VISTA PRINCIPAL DEL HERO
-              2-Column CSS Grid en Desktop con tarjetas técnicas bajo la foto
              ========================================================= */}
           <div
             className={`col-start-1 row-start-1 w-full transition-all duration-700 ease-in-out transform ${
@@ -101,8 +125,12 @@ export default function Hero({
           >
             <div className="space-y-6">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-                {/* Left Column - Editorial Content & Refined Flat/Subtle Buttons (7 cols) */}
-                <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
+                {/* Left Column - Editorial Content & Value Proposition (7 cols) */}
+                <div
+                  className={`lg:col-span-7 space-y-6 text-center lg:text-left transition-all duration-[800ms] delay-100 ease-out ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                  }`}
+                >
                   {/* Availability Pill */}
                   <div className="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full backdrop-blur-xl bg-slate-950/30 border border-slate-800/80 text-xs font-medium text-slate-300">
                     <span className="relative flex h-2 w-2">
@@ -114,7 +142,7 @@ export default function Hero({
                   </div>
 
                   {/* Main Heading & Role */}
-                  <div className="space-y-3.5">
+                  <div className="space-y-3">
                     <p className="text-xs uppercase tracking-[0.25em] text-teal-400 font-semibold">
                       Ingeniería de Software & Desarrollo Web
                     </p>
@@ -130,9 +158,29 @@ export default function Hero({
                   </div>
 
                   {/* Concise Biography */}
-                  <p className="text-sm leading-relaxed sm:text-base text-slate-400 max-w-2xl mx-auto lg:mx-0 mb-8 font-normal">
+                  <p className="text-sm leading-relaxed sm:text-base text-slate-400 max-w-2xl mx-auto lg:mx-0 font-normal">
                     {personalInfo.shortBio}
                   </p>
+
+                  {/* Sección "Lo que puedo aportar" */}
+                  {personalInfo.contributions && (
+                    <div className="p-4 rounded-2xl backdrop-blur-xl bg-slate-950/30 border border-slate-800/80 text-left max-w-2xl mx-auto lg:mx-0 space-y-2">
+                      <p className="text-[11px] uppercase tracking-widest text-teal-400 font-semibold">
+                        Lo que puedo aportar
+                      </p>
+                      <ul className="space-y-1.5">
+                        {personalInfo.contributions.map((item) => (
+                          <li
+                            key={item}
+                            className="flex items-start space-x-2 text-xs sm:text-sm text-slate-300"
+                          >
+                            <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
 
                   {/* Refined Navigation Buttons: 2 primary buttons on mobile ("Sobre mí" & "Ver CV"), full set on md+ */}
                   <div className="flex flex-col sm:flex-row md:flex-wrap items-center justify-center lg:justify-start gap-4 pt-1">
@@ -180,7 +228,11 @@ export default function Hero({
                 </div>
 
                 {/* Right Column - Portrait Card + 3 Compact Technical Cards Below (5 cols) */}
-                <div className="lg:col-span-5 flex flex-col items-center space-y-4 w-full">
+                <div
+                  className={`lg:col-span-5 flex flex-col items-center space-y-4 w-full transition-all duration-[800ms] delay-200 ease-out ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                  }`}
+                >
                   {/* Portrait Card (interactive-card) */}
                   <div className="relative group w-full max-w-md">
                     <div className="absolute -inset-3 rounded-[2.25rem] bg-gradient-to-tr from-teal-400/10 via-violet-500/10 to-transparent blur-2xl opacity-75 group-hover:opacity-100 transition duration-700 pointer-events-none" />
@@ -208,7 +260,7 @@ export default function Hero({
                     </div>
                   </div>
 
-                  {/* 3 Technical Specialty Cards Directly Below Portrait (Minigrid of 3 columns) */}
+                  {/* 3 Technical Specialty Cards Directly Below Portrait */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-md lg:max-w-none">
                     {personalInfo.badges.map((badge, index) => (
                       <div
@@ -238,7 +290,6 @@ export default function Hero({
 
           {/* =========================================================
               CAPA 2: SECCIÓN "SOBRE MÍ" (PANEL DESLIZANTE)
-              RETORNO: BOTÓN SUPERIOR IZQUIERDO + TÍTULO "Perfil Académico & Técnico"
              ========================================================= */}
           <div
             className={`col-start-1 row-start-1 w-full transition-all duration-700 ease-in-out transform ${
@@ -272,7 +323,6 @@ export default function Hero({
 
               {/* Main "Sobre mí" Bento Grid */}
               <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-
                 {/* Left Column: Stylized Portrait & Quick Links */}
                 <div className="interactive-card lg:col-span-4 rounded-3xl backdrop-blur-xl bg-slate-950/20 border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden transition-all duration-300">
                   <div className="space-y-5">
@@ -346,27 +396,41 @@ export default function Hero({
                   </div>
                 </div>
 
-                {/* Right Column: Detailed Biography & Academic Credentials */}
+                {/* Right Column: Value Proposition, Biography & Academic Credentials */}
                 <div className="lg:col-span-8 flex flex-col justify-between space-y-6">
-                  {/* Detailed Biography Card */}
+                  {/* Detailed Biography & Contributions Card */}
                   <div className="interactive-card rounded-3xl backdrop-blur-xl bg-slate-950/20 border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20 p-6 sm:p-8 space-y-4 relative overflow-hidden transition-all duration-300">
                     <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-teal-400/40 to-transparent" />
 
                     <div className="flex items-center space-x-2.5 text-xs uppercase tracking-widest text-teal-400 font-semibold">
                       <BookOpen className="w-4 h-4" />
-                      <span>Biografía & Visión Profesional</span>
+                      <span>Lo que puedo aportar & Visión Profesional</span>
                     </div>
 
                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-100 tracking-tight">
-                      Ingeniería de software con bases sólidas y enfoque en calidad técnica.
+                      Ingeniería de software orientada a resultados y calidad técnica.
                     </h3>
 
                     <p className="text-sm leading-relaxed sm:text-base text-slate-300/95">
                       {personalInfo.detailedBio}
                     </p>
+
+                    {personalInfo.contributions && (
+                      <div className="pt-2 grid grid-cols-1 gap-2">
+                        {personalInfo.contributions.map((item) => (
+                          <div
+                            key={item}
+                            className="flex items-center space-x-2.5 p-2.5 rounded-xl bg-slate-900/40 border border-slate-800/80 text-xs sm:text-sm text-slate-200"
+                          >
+                            <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
-                  {/* Sub-grid: USAC Education & Practical Engineering Focus */}
+                  {/* Sub-grid: USAC Education & Languages */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {/* Education Card */}
                     <div className="interactive-card rounded-3xl backdrop-blur-xl bg-slate-950/20 border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20 p-6 space-y-3.5 transition-all duration-300">
@@ -386,17 +450,17 @@ export default function Hero({
                       ))}
                     </div>
 
-                    {/* Languages & Technical Communication Card */}
+                    {/* Languages & Learning Card */}
                     <div className="interactive-card rounded-3xl backdrop-blur-xl bg-slate-950/20 border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20 p-6 flex flex-col justify-between space-y-4 transition-all duration-300">
                       <div className="space-y-3">
                         <div className="flex items-center space-x-2.5 text-xs uppercase tracking-widest text-teal-400 font-semibold">
                           <Cpu className="w-4 h-4" />
-                          <span>Idiomas & Comunicación</span>
+                          <span>Idiomas & Aprendizaje Continuo</span>
                         </div>
-                        <div className="space-y-2.5">
+                        <div className="space-y-2">
                           {personalInfo.languages?.map((lang) => (
                             <div
-                              key={lang.name}
+                              key={lang.name || lang.label}
                               className="p-2.5 rounded-2xl bg-slate-900/40 border border-slate-800/80 space-y-1"
                             >
                               <div className="flex items-center justify-between text-xs sm:text-sm">
