@@ -105,14 +105,10 @@ export default function Hero({
       ref={sectionRef}
       className="relative snap-start min-h-screen w-full flex flex-col justify-center py-24 overflow-hidden"
     >
-      <div
-        className={`relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-[800ms] ease-out ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-        }`}
-      >
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative grid grid-cols-1 items-center">
           {/* =========================================================
-              CAPA 1: VISTA PRINCIPAL DEL HERO
+              CAPA 1: VISTA PRINCIPAL DEL HERO (LIMPIA Y ENFOCADA)
              ========================================================= */}
           <div
             className={`col-start-1 row-start-1 w-full transition-all duration-700 ease-in-out transform ${
@@ -127,8 +123,8 @@ export default function Hero({
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                 {/* Left Column - Editorial Content & Value Proposition (7 cols) */}
                 <div
-                  className={`lg:col-span-7 space-y-6 text-center lg:text-left transition-all duration-[800ms] delay-100 ease-out ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                  className={`lg:col-span-7 space-y-6 text-center lg:text-left transition-all duration-500 delay-100 ease-out ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                   }`}
                 >
                   {/* Availability Pill */}
@@ -157,63 +153,46 @@ export default function Hero({
                     </h2>
                   </div>
 
-                  {/* Concise Biography */}
+                  {/* Concise Results-Oriented Biography */}
                   <p className="text-sm leading-relaxed sm:text-base text-slate-400 max-w-2xl mx-auto lg:mx-0 font-normal">
                     {personalInfo.shortBio}
                   </p>
 
-                  {/* Sección "Lo que puedo aportar" */}
-                  {personalInfo.contributions && (
-                    <div className="p-4 rounded-2xl backdrop-blur-xl bg-slate-950/30 border border-slate-800/80 text-left max-w-2xl mx-auto lg:mx-0 space-y-2">
-                      <p className="text-[11px] uppercase tracking-widest text-teal-400 font-semibold">
-                        Lo que puedo aportar
-                      </p>
-                      <ul className="space-y-1.5">
-                        {personalInfo.contributions.map((item) => (
-                          <li
-                            key={item}
-                            className="flex items-start space-x-2 text-xs sm:text-sm text-slate-300"
-                          >
-                            <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
+                  {/* Balanced CTA Hierarchy:
+                      Primary: "Ver Proyectos" (Emerald/Teal Gradient)
+                      Secondary: "Sobre mí" (Both visible on Mobile & Desktop)
+                      Complementary (Desktop md+): "Ver CV" & "Contáctame" */}
+                  <div className="flex flex-col sm:flex-row md:flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2">
+                    {/* Primary CTA: Ver Proyectos */}
+                    <a
+                      href="#proyectos"
+                      className="w-full sm:w-auto justify-center group inline-flex items-center space-x-2 px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-500/10 to-teal-500/10 hover:from-emerald-500/20 hover:to-teal-500/20 border border-emerald-500/30 text-emerald-400 font-semibold text-sm shadow-[0_0_15px_rgba(16,185,129,0.1)] transition-all duration-300"
+                    >
+                      <Code2 className="w-4 h-4" />
+                      <span>Ver Proyectos</span>
+                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    </a>
 
-                  {/* Refined Navigation Buttons: 2 primary buttons on mobile ("Sobre mí" & "Ver CV"), full set on md+ */}
-                  <div className="flex flex-col sm:flex-row md:flex-wrap items-center justify-center lg:justify-start gap-4 pt-1">
-                    {/* Primary (Mobile & Desktop): Sobre mí with subtle emerald/teal gradient */}
+                    {/* Secondary CTA: Sobre mí */}
                     <button
                       type="button"
                       onClick={handleOpenAbout}
-                      className="w-full sm:w-auto justify-center group inline-flex items-center space-x-2 px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-500/10 to-teal-500/10 hover:from-emerald-500/20 hover:to-teal-500/20 border border-emerald-500/30 text-emerald-400 font-semibold text-sm shadow-[0_0_15px_rgba(16,185,129,0.1)] transition-all duration-300 cursor-pointer"
+                      className="w-full sm:w-auto justify-center inline-flex items-center space-x-2 px-5 py-3 rounded-xl bg-slate-900/40 hover:bg-slate-800/60 border border-slate-800/80 hover:border-teal-400/40 text-slate-200 hover:text-teal-300 font-medium text-sm transition-all duration-300 cursor-pointer"
                     >
-                      <User className="w-4 h-4" />
+                      <User className="w-4 h-4 text-teal-400" />
                       <span>Sobre mí</span>
-                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
                     </button>
 
-                    {/* Secondary (Mobile & Desktop): Ver CV */}
+                    {/* Desktop-only (hidden on mobile): Ver CV */}
                     <a
                       href={personalInfo.cvUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       download
-                      className="w-full sm:w-auto justify-center inline-flex items-center space-x-2 px-5 py-3 rounded-xl bg-slate-900/40 hover:bg-slate-800/50 border border-slate-800/80 md:border-transparent text-slate-200 hover:text-teal-300 font-medium text-sm transition-all duration-300"
+                      className="hidden md:inline-flex items-center space-x-2 px-4 py-3 rounded-xl bg-slate-900/30 hover:bg-slate-800/50 text-slate-200 hover:text-teal-300 font-medium text-sm transition-all duration-300"
                     >
                       <Download className="w-4 h-4 text-teal-400" />
                       <span>Ver CV</span>
-                    </a>
-
-                    {/* Desktop-only (hidden on mobile): Ver Proyectos */}
-                    <a
-                      href="#proyectos"
-                      className="hidden md:inline-flex items-center space-x-2 px-4 py-3 rounded-xl bg-slate-900/30 hover:bg-slate-800/50 text-slate-200 hover:text-teal-300 font-medium text-sm transition-all duration-300"
-                    >
-                      <Code2 className="w-4 h-4 text-teal-400" />
-                      <span>Ver Proyectos</span>
                     </a>
 
                     {/* Desktop-only (hidden on mobile): Contáctame */}
@@ -227,17 +206,17 @@ export default function Hero({
                   </div>
                 </div>
 
-                {/* Right Column - Portrait Card + 3 Compact Technical Cards Below (5 cols) */}
+                {/* Right Column - Portrait Card + Technical Specialties (5 cols) */}
                 <div
-                  className={`lg:col-span-5 flex flex-col items-center space-y-4 w-full transition-all duration-[800ms] delay-200 ease-out ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                  className={`lg:col-span-5 flex flex-col items-center space-y-4 w-full transition-all duration-500 delay-200 ease-out ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                   }`}
                 >
                   {/* Portrait Card (interactive-card) */}
                   <div className="relative group w-full max-w-md">
                     <div className="absolute -inset-3 rounded-[2.25rem] bg-gradient-to-tr from-teal-400/10 via-violet-500/10 to-transparent blur-2xl opacity-75 group-hover:opacity-100 transition duration-700 pointer-events-none" />
 
-                    <div className="interactive-card relative w-full h-80 sm:h-96 rounded-3xl backdrop-blur-xl bg-slate-950/20 border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20 p-3.5 transition-all duration-500">
+                    <div className="interactive-card relative w-full h-72 sm:h-96 rounded-3xl backdrop-blur-xl bg-slate-950/20 border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20 p-3.5 transition-all duration-500">
                       <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-950/40">
                         <img
                           src={personalInfo.avatarUrl}
@@ -260,8 +239,21 @@ export default function Hero({
                     </div>
                   </div>
 
-                  {/* 3 Technical Specialty Cards Directly Below Portrait */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-md lg:max-w-none">
+                  {/* Mobile (< sm): Ultra-compact 1-line pills to prevent excessive vertical height */}
+                  <div className="flex sm:hidden flex-wrap items-center justify-center gap-2 w-full max-w-md">
+                    {personalInfo.badges.map((badge, index) => (
+                      <div
+                        key={badge.value}
+                        className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full backdrop-blur-xl bg-slate-950/30 border border-slate-800/80 text-xs text-slate-200"
+                      >
+                        {getBadgeIcon(index)}
+                        <span className="font-semibold">{badge.value}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Tablet & Desktop (sm+): 3 Technical Specialty Cards Below Portrait */}
+                  <div className="hidden sm:grid sm:grid-cols-3 gap-3 w-full max-w-md lg:max-w-none">
                     {personalInfo.badges.map((badge, index) => (
                       <div
                         key={badge.value}
@@ -289,7 +281,7 @@ export default function Hero({
           </div>
 
           {/* =========================================================
-              CAPA 2: SECCIÓN "SOBRE MÍ" (PANEL DESLIZANTE)
+              CAPA 2: SECCIÓN "SOBRE MÍ" (CONTIENE EXCLUSIVAMENTE "LO QUE PUEDO APORTAR")
              ========================================================= */}
           <div
             className={`col-start-1 row-start-1 w-full transition-all duration-700 ease-in-out transform ${
@@ -396,7 +388,7 @@ export default function Hero({
                   </div>
                 </div>
 
-                {/* Right Column: Value Proposition, Biography & Academic Credentials */}
+                {/* Right Column: Value Proposition ("Lo que puedo aportar"), Biography & Academic Credentials */}
                 <div className="lg:col-span-8 flex flex-col justify-between space-y-6">
                   {/* Detailed Biography & Contributions Card */}
                   <div className="interactive-card rounded-3xl backdrop-blur-xl bg-slate-950/20 border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20 p-6 sm:p-8 space-y-4 relative overflow-hidden transition-all duration-300">
@@ -430,7 +422,7 @@ export default function Hero({
                     )}
                   </div>
 
-                  {/* Sub-grid: USAC Education & Languages */}
+                  {/* Sub-grid: USAC Education & Engineering Focus */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {/* Education Card */}
                     <div className="interactive-card rounded-3xl backdrop-blur-xl bg-slate-950/20 border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20 p-6 space-y-3.5 transition-all duration-300">
@@ -450,34 +442,34 @@ export default function Hero({
                       ))}
                     </div>
 
-                    {/* Languages & Learning Card */}
+                    {/* Engineering Methodology & Continuous Learning Card */}
                     <div className="interactive-card rounded-3xl backdrop-blur-xl bg-slate-950/20 border border-slate-800/80 shadow-[0_0_30px_rgba(139,92,246,0.03)] hover:border-violet-500/20 p-6 flex flex-col justify-between space-y-4 transition-all duration-300">
-                      <div className="space-y-3">
+                      <div className="space-y-2.5">
                         <div className="flex items-center space-x-2.5 text-xs uppercase tracking-widest text-teal-400 font-semibold">
                           <Cpu className="w-4 h-4" />
-                          <span>Idiomas & Aprendizaje Continuo</span>
+                          <span>Enfoque de Ingeniería</span>
                         </div>
-                        <div className="space-y-2">
-                          {personalInfo.languages?.map((lang) => (
-                            <div
-                              key={lang.name || lang.label}
-                              className="p-2.5 rounded-2xl bg-slate-900/40 border border-slate-800/80 space-y-1"
+                        <p className="text-base font-bold text-slate-100">
+                          Arquitectura Limpia & Escalabilidad
+                        </p>
+                        <p className="text-xs text-slate-400 leading-relaxed">
+                          Diseño de servicios desacoplados con validación de datos, control de
+                          versiones bajo Gitflow y pruebas de extremo a extremo.
+                        </p>
+                      </div>
+
+                      {personalInfo.learning && (
+                        <div className="pt-3 border-t border-slate-800/80 flex flex-wrap gap-1.5">
+                          {personalInfo.learning.map((topic) => (
+                            <span
+                              key={topic}
+                              className="text-[11px] px-2.5 py-1 rounded-lg bg-teal-400/10 border border-teal-400/25 text-teal-300 font-medium"
                             >
-                              <div className="flex items-center justify-between text-xs sm:text-sm">
-                                <span className="font-bold text-slate-100">
-                                  {lang.flag} {lang.name}
-                                </span>
-                                <span className="text-[11px] px-2 py-0.5 rounded-md bg-teal-400/10 border border-teal-400/25 text-teal-300 font-semibold">
-                                  {lang.level}
-                                </span>
-                              </div>
-                              <p className="text-[11px] text-slate-400 leading-snug">
-                                {lang.detail}
-                              </p>
-                            </div>
+                              {topic}
+                            </span>
                           ))}
                         </div>
-                      </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -488,7 +480,7 @@ export default function Hero({
         </div>
       </div>
 
-      {/* Circular Down-Arrow Smooth Scroll Button */}
+      {/* Circular Down-Arrow Smooth Scroll Button (without infinite bounce) */}
       {!isAboutOpen && (
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-1 text-slate-400 opacity-80 hover:opacity-100 transition-opacity">
           <button
@@ -496,10 +488,10 @@ export default function Hero({
             onClick={() =>
               document.getElementById('proyectos')?.scrollIntoView({ behavior: 'smooth' })
             }
-            className="p-3 rounded-full backdrop-blur-xl bg-slate-950/30 border border-slate-800/80 hover:border-teal-400/50 hover:text-teal-400 transition-all cursor-pointer"
+            className="group p-3 rounded-full backdrop-blur-xl bg-slate-950/30 border border-slate-800/80 hover:border-teal-400/50 hover:text-teal-400 hover:translate-y-1 transition-all duration-300 cursor-pointer"
             aria-label="Desplazarse a proyectos"
           >
-            <ArrowDown className="w-4 h-4 animate-bounce" />
+            <ArrowDown className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5" />
           </button>
         </div>
       )}

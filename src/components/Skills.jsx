@@ -55,34 +55,81 @@ export default function Skills() {
       ref={sectionRef}
       className="snap-start min-h-screen w-full flex flex-col justify-center py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
     >
-      <div
-        className={`w-full space-y-10 transition-all duration-[800ms] ease-out ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-        }`}
-      >
+      <div className="w-full space-y-10">
         {/* Section Header (Stagger 1) */}
         <div
-          className={`text-center space-y-3 transition-all duration-[800ms] delay-100 ease-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          className={`text-center space-y-3 transition-all duration-500 delay-100 ease-out ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full backdrop-blur-md bg-slate-800/50 border border-slate-700/70 text-xs font-medium uppercase tracking-wider text-teal-400">
             <Cpu className="w-3.5 h-3.5" />
-            <span>Competencias, Idiomas & Stack Técnico</span>
+            <span>Stack Técnico, Competencias & Idiomas</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-100">
             Habilidades & Competencias
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-            Combinación de competencias profesionales, comunicación técnica bilingüe y dominio de
-            tecnologías Full-Stack orientadas a construir software mantenible.
+            Dominio de tecnologías Full-Stack para arquitectura de software moderna, respaldado por
+            competencias analíticas e inglés técnico.
           </p>
         </div>
 
-        {/* ROW 1 (Priority): Competencias Profesionales (Soft Skills) + Idiomas + Actualmente Aprendiendo (Stagger 2) */}
+        {/* ROW 1 (Top Priority for Recruiters): Tecnologías (Hard Skills) Grid (Stagger 2) */}
         <div
-          className={`grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch transition-all duration-[800ms] delay-150 ease-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          className={`grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 transition-all duration-500 delay-150 ease-out ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+          }`}
+        >
+          {hardSkillsList.map((group) => (
+            <div
+              key={group.category}
+              className="interactive-card backdrop-blur-md bg-slate-900/50 hover:bg-slate-900/70 border border-slate-800 hover:border-teal-400/40 rounded-3xl p-6 transition-all duration-300 ease-in-out shadow-sm flex flex-col justify-between"
+            >
+              <div>
+                <div className="mb-5 pb-3.5 border-b border-slate-800 space-y-1.5">
+                  <div className="flex items-center space-x-2.5">
+                    <div className="p-2 rounded-xl bg-teal-400/10 border border-teal-400/20">
+                      {getCategoryIcon(group.category)}
+                    </div>
+                    <h3 className="text-base sm:text-lg font-bold tracking-tight text-slate-100">
+                      {group.category}
+                    </h3>
+                  </div>
+                  {group.description && (
+                    <p className="text-xs text-slate-400 leading-relaxed">{group.description}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2.5">
+                  {group.items.map((skill) => (
+                    <div
+                      key={skill.name}
+                      className="flex items-center justify-between p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/90 hover:border-teal-400/30 transition-colors duration-200"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <span className="h-1.5 w-1.5 rounded-full bg-teal-400 shrink-0" />
+                        <span className="text-xs sm:text-sm font-semibold text-slate-200">
+                          {skill.name}
+                        </span>
+                      </div>
+                      {skill.tag && (
+                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-slate-900 text-teal-300 border border-slate-800">
+                          {skill.tag}
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ROW 2: Competencias Profesionales (Soft Skills) + Idiomas + Actualmente Aprendiendo (Stagger 3) */}
+        <div
+          className={`grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch transition-all duration-500 delay-200 ease-out ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
           {/* Soft Skills Panel (7 cols) */}
@@ -184,57 +231,6 @@ export default function Skills() {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* ROW 2: Tecnologías (Hard Skills) Grid (Stagger 3) */}
-        <div
-          className={`grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 transition-all duration-[800ms] delay-200 ease-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}
-        >
-          {hardSkillsList.map((group) => (
-            <div
-              key={group.category}
-              className="interactive-card backdrop-blur-md bg-slate-900/50 hover:bg-slate-900/70 border border-slate-800 hover:border-teal-400/40 rounded-3xl p-6 transition-all duration-300 ease-in-out shadow-sm flex flex-col justify-between"
-            >
-              <div>
-                <div className="mb-5 pb-3.5 border-b border-slate-800 space-y-1.5">
-                  <div className="flex items-center space-x-2.5">
-                    <div className="p-2 rounded-xl bg-teal-400/10 border border-teal-400/20">
-                      {getCategoryIcon(group.category)}
-                    </div>
-                    <h3 className="text-base sm:text-lg font-bold tracking-tight text-slate-100">
-                      {group.category}
-                    </h3>
-                  </div>
-                  {group.description && (
-                    <p className="text-xs text-slate-400 leading-relaxed">{group.description}</p>
-                  )}
-                </div>
-
-                <div className="space-y-2.5">
-                  {group.items.map((skill) => (
-                    <div
-                      key={skill.name}
-                      className="flex items-center justify-between p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/90 hover:border-teal-400/30 transition-colors duration-200"
-                    >
-                      <div className="flex items-center space-x-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-teal-400 shrink-0" />
-                        <span className="text-xs sm:text-sm font-semibold text-slate-200">
-                          {skill.name}
-                        </span>
-                      </div>
-                      {skill.tag && (
-                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-slate-900 text-teal-300 border border-slate-800">
-                          {skill.tag}
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
