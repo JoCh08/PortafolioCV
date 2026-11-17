@@ -93,7 +93,7 @@ export default function Projects() {
     <section
       id="proyectos"
       ref={sectionRef}
-      className={`py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ease-in-out transform ${
+      className={`min-h-screen snap-start flex flex-col justify-center py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ease-in-out transform ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >

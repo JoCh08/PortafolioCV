@@ -82,7 +82,7 @@ export default function Hero({
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center pt-24 pb-20 overflow-hidden"
+      className="relative min-h-screen snap-start flex items-center justify-center pt-24 pb-20 overflow-hidden"
     >
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative grid grid-cols-1 items-center">
@@ -134,17 +134,18 @@ export default function Hero({
                     {personalInfo.shortBio}
                   </p>
 
-                  {/* Refined Navigation Buttons: 2 primary buttons on mobile, full set on md+ */}
+                  {/* Refined Navigation Buttons: 2 primary buttons on mobile ("Sobre mí" & "Ver CV"), full set on md+ */}
                   <div className="flex flex-col sm:flex-row md:flex-wrap items-center justify-center lg:justify-start gap-4 pt-1">
-                    {/* Primary (Mobile & Desktop): Ver Proyectos with subtle emerald/teal gradient */}
-                    <a
-                      href="#proyectos"
-                      className="w-full sm:w-auto justify-center group inline-flex items-center space-x-2 px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-500/10 to-teal-500/10 hover:from-emerald-500/20 hover:to-teal-500/20 border border-emerald-500/30 text-emerald-400 font-semibold text-sm shadow-[0_0_15px_rgba(16,185,129,0.1)] transition-all duration-300"
+                    {/* Primary (Mobile & Desktop): Sobre mí with subtle emerald/teal gradient */}
+                    <button
+                      type="button"
+                      onClick={handleOpenAbout}
+                      className="w-full sm:w-auto justify-center group inline-flex items-center space-x-2 px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-500/10 to-teal-500/10 hover:from-emerald-500/20 hover:to-teal-500/20 border border-emerald-500/30 text-emerald-400 font-semibold text-sm shadow-[0_0_15px_rgba(16,185,129,0.1)] transition-all duration-300 cursor-pointer"
                     >
-                      <Code2 className="w-4 h-4" />
-                      <span>Ver Proyectos</span>
+                      <User className="w-4 h-4" />
+                      <span>Sobre mí</span>
                       <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-                    </a>
+                    </button>
 
                     {/* Secondary (Mobile & Desktop): Ver CV */}
                     <a
@@ -158,15 +159,14 @@ export default function Hero({
                       <span>Ver CV</span>
                     </a>
 
-                    {/* Desktop-only (hidden on mobile): Sobre mí */}
-                    <button
-                      type="button"
-                      onClick={handleOpenAbout}
-                      className="hidden md:inline-flex items-center space-x-2 px-4 py-3 rounded-xl bg-slate-900/30 hover:bg-slate-800/50 text-slate-200 hover:text-teal-300 font-medium text-sm transition-all duration-300 cursor-pointer"
+                    {/* Desktop-only (hidden on mobile): Ver Proyectos */}
+                    <a
+                      href="#proyectos"
+                      className="hidden md:inline-flex items-center space-x-2 px-4 py-3 rounded-xl bg-slate-900/30 hover:bg-slate-800/50 text-slate-200 hover:text-teal-300 font-medium text-sm transition-all duration-300"
                     >
-                      <User className="w-4 h-4 text-teal-400" />
-                      <span>Sobre mí</span>
-                    </button>
+                      <Code2 className="w-4 h-4 text-teal-400" />
+                      <span>Ver Proyectos</span>
+                    </a>
 
                     {/* Desktop-only (hidden on mobile): Contáctame */}
                     <a

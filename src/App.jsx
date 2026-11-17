@@ -25,7 +25,7 @@ export default function App() {
       />
 
       {/* Main Content */}
-      <main className="relative z-10 space-y-20">
+      <main className="relative z-10">
         <Hero
           isAboutOpen={isAboutOpen}
           onOpenAbout={() => setIsAboutOpen(true)}
