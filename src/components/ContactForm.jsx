@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Mail, Send, MessageSquare, FileText } from 'lucide-react';
+import { Mail, Send, MessageSquare, FileText, Copy, Check } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import { personalInfo } from '../data/portfolioData';
 
 export default function ContactForm() {
   const [isVisible, setIsVisible] = useState(false);
+  const [copied, setCopied] = useState(false);
   const sectionRef = useRef(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -38,6 +39,18 @@ export default function ContactForm() {
     window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
   };
 
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(personalInfo.email);
+      setCopied(true);
+      setTimeout(() => {
+        setCopied(false);
+      }, 2500);
+    } catch {
+      setCopied(false);
+    }
+  };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -48,15 +61,11 @@ export default function ContactForm() {
       ref={sectionRef}
       className="snap-start min-h-screen w-full flex flex-col justify-center py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
     >
-      <div
-        className={`w-full transition-all duration-[800ms] ease-out ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-        }`}
-      >
+      <div className="w-full">
         {/* Section Header (Stagger 1) */}
         <div
-          className={`text-center space-y-3 mb-14 transition-all duration-[800ms] delay-100 ease-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          className={`text-center space-y-3 mb-14 transition-all duration-500 delay-100 ease-out ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full backdrop-blur-md bg-slate-800/50 border border-slate-700/70 text-xs font-medium uppercase tracking-wider text-teal-400">
@@ -67,154 +76,180 @@ export default function ContactForm() {
             ¿Hablamos sobre tu próximo proyecto?
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-            Envíame un mensaje directo o conéctate conmigo a través de mis canales profesionales.
+            Envíame un mensaje directo, copia mi correo en un clic o conéctate conmigo a través de
+            mis canales profesionales.
           </p>
         </div>
 
         <div
-          className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start transition-all duration-[800ms] delay-200 ease-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start transition-all duration-500 delay-200 ease-out ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
-        {/* Contact Info & Social Shortcuts (5 cols) */}
-        <div className="lg:col-span-5 space-y-6 backdrop-blur-md bg-slate-800/35 border border-slate-700/70 rounded-3xl p-6 sm:p-8">
-          <h3 className="text-xl font-bold tracking-tight text-slate-100">Canales de Contacto</h3>
-          <p className="text-slate-300/90 text-sm leading-relaxed">
-            Disponible para oportunidades de desarrollo de software Junior, prácticas profesionales
-            y proyectos Full-Stack.
-          </p>
+          {/* Contact Info & Social Shortcuts (5 cols) */}
+          <div className="interactive-card lg:col-span-5 space-y-6 backdrop-blur-md bg-slate-800/35 border border-slate-700/70 rounded-3xl p-6 sm:p-8">
+            <h3 className="text-xl font-bold tracking-tight text-slate-100">Canales de Contacto</h3>
+            <p className="text-slate-300/90 text-sm leading-relaxed">
+              Disponible para oportunidades de desarrollo de software Junior, prácticas
+              profesionales y proyectos Full-Stack.
+            </p>
 
-          <div className="space-y-3.5 pt-1">
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="flex items-center space-x-3 p-3.5 rounded-2xl bg-slate-900/55 border border-slate-700/70 hover:border-teal-400 text-slate-300 hover:text-teal-300 transition-all duration-300 group"
-            >
-              <div className="p-2 rounded-xl bg-teal-400/10 text-teal-400 group-hover:bg-teal-400/20">
-                <Mail className="w-5 h-5" />
-              </div>
-              <div className="truncate">
-                <p className="text-xs text-slate-400 font-medium">Correo electrónico</p>
-                <p className="text-sm font-semibold truncate">{personalInfo.email}</p>
-              </div>
-            </a>
+            <div className="space-y-3.5 pt-1">
+              <a
+                href={`mailto:${personalInfo.email}`}
+                className="flex items-center space-x-3 p-3.5 rounded-2xl bg-slate-900/55 border border-slate-700/70 hover:border-teal-400 text-slate-300 hover:text-teal-300 transition-all duration-300 group"
+              >
+                <div className="p-2 rounded-xl bg-teal-400/10 text-teal-400 group-hover:bg-teal-400/20">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div className="truncate">
+                  <p className="text-xs text-slate-400 font-medium">Correo electrónico</p>
+                  <p className="text-sm font-semibold truncate">{personalInfo.email}</p>
+                </div>
+              </a>
 
-            <a
-              href={personalInfo.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-3 p-3.5 rounded-2xl bg-slate-900/55 border border-slate-700/70 hover:border-teal-400 text-slate-300 hover:text-teal-300 transition-all duration-300 group"
-            >
-              <div className="p-2 rounded-xl bg-teal-400/10 text-teal-400 group-hover:bg-teal-400/20">
-                <GithubIcon className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-xs text-slate-400 font-medium">GitHub</p>
-                <p className="text-sm font-semibold">Repositorios & Código</p>
-              </div>
-            </a>
+              <a
+                href={personalInfo.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-3 p-3.5 rounded-2xl bg-slate-900/55 border border-slate-700/70 hover:border-teal-400 text-slate-300 hover:text-teal-300 transition-all duration-300 group"
+              >
+                <div className="p-2 rounded-xl bg-teal-400/10 text-teal-400 group-hover:bg-teal-400/20">
+                  <GithubIcon className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-400 font-medium">GitHub</p>
+                  <p className="text-sm font-semibold">Repositorios & Código</p>
+                </div>
+              </a>
 
-            <a
-              href={personalInfo.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-3 p-3.5 rounded-2xl bg-slate-900/55 border border-slate-700/70 hover:border-teal-400 text-slate-300 hover:text-teal-300 transition-all duration-300 group"
-            >
-              <div className="p-2 rounded-xl bg-teal-400/10 text-teal-400 group-hover:bg-teal-400/20">
-                <LinkedinIcon className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-xs text-slate-400 font-medium">LinkedIn</p>
-                <p className="text-sm font-semibold">Red Profesional</p>
-              </div>
-            </a>
+              <a
+                href={personalInfo.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-3 p-3.5 rounded-2xl bg-slate-900/55 border border-slate-700/70 hover:border-teal-400 text-slate-300 hover:text-teal-300 transition-all duration-300 group"
+              >
+                <div className="p-2 rounded-xl bg-teal-400/10 text-teal-400 group-hover:bg-teal-400/20">
+                  <LinkedinIcon className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-400 font-medium">LinkedIn</p>
+                  <p className="text-sm font-semibold">Red Profesional</p>
+                </div>
+              </a>
 
-            <a
-              href={personalInfo.cvUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-              className="flex items-center justify-center space-x-2 p-3.5 rounded-2xl border border-slate-700 hover:border-teal-400 hover:bg-teal-900/20 text-teal-300 text-xs font-semibold transition-all duration-300 mt-2 hover:drop-shadow-[0_0_15px_rgba(20,184,166,0.3)]"
-            >
-              <FileText className="w-4 h-4 text-teal-400" />
-              <span>Ver CV (PDF)</span>
-            </a>
+              <a
+                href={personalInfo.cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+                className="flex items-center justify-center space-x-2 p-3.5 rounded-2xl border border-slate-700 hover:border-teal-400 hover:bg-teal-900/20 text-teal-300 text-xs font-semibold transition-all duration-300 mt-2 hover:drop-shadow-[0_0_15px_rgba(20,184,166,0.3)]"
+              >
+                <FileText className="w-4 h-4 text-teal-400" />
+                <span>Ver CV (PDF)</span>
+              </a>
+            </div>
           </div>
-        </div>
 
-        {/* Contact Form (7 cols) */}
-        <div className="lg:col-span-7 backdrop-blur-md bg-slate-800/35 border border-slate-700/70 rounded-3xl p-6 sm:p-8 relative">
-          <form
-            action="https://formspree.io/f/TU_ID"
-            method="POST"
-            onSubmit={handleSubmit}
-            className="space-y-5"
-          >
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
-              >
-                Nombre
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Tu nombre completo"
-                className="w-full px-4 py-3 rounded-xl bg-slate-900/75 border border-slate-700/80 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400/50 transition-all text-sm"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
-              >
-                Correo Electrónico
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="tu@correo.com"
-                className="w-full px-4 py-3 rounded-xl bg-slate-900/75 border border-slate-700/80 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400/50 transition-all text-sm"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="message"
-                className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
-              >
-                Mensaje
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
-                required
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Escribe tu mensaje aquí..."
-                className="w-full px-4 py-3 rounded-xl bg-slate-900/75 border border-slate-700/80 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400/50 transition-all text-sm resize-none"
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full py-3.5 px-6 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-semibold text-sm border border-teal-300/30 transition-all duration-300 hover:drop-shadow-[0_0_15px_rgba(20,184,166,0.3)] flex items-center justify-center space-x-2 cursor-pointer hover:-translate-y-0.5"
+          {/* Contact Form (7 cols) */}
+          <div className="interactive-card lg:col-span-7 backdrop-blur-md bg-slate-800/35 border border-slate-700/70 rounded-3xl p-6 sm:p-8 relative">
+            <form
+              action="https://formspree.io/f/TU_ID"
+              method="POST"
+              onSubmit={handleSubmit}
+              className="space-y-5"
             >
-              <Send className="w-4 h-4" />
-              <span>Enviar Mensaje</span>
-            </button>
-          </form>
-        </div>
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
+                >
+                  Nombre
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Tu nombre completo"
+                  className="w-full px-4 py-3 rounded-xl bg-slate-900/75 border border-slate-700/80 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400/50 transition-all text-sm"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
+                >
+                  Correo Electrónico
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="tu@correo.com"
+                  className="w-full px-4 py-3 rounded-xl bg-slate-900/75 border border-slate-700/80 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400/50 transition-all text-sm"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
+                >
+                  Mensaje
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  required
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Escribe tu mensaje aquí..."
+                  className="w-full px-4 py-3 rounded-xl bg-slate-900/75 border border-slate-700/80 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400/50 transition-all text-sm resize-none"
+                ></textarea>
+              </div>
+
+              {/* Action Bar: Primary Submit + Secondary Copy Email Quick Win */}
+              <div className="flex flex-col sm:flex-row items-center gap-3 pt-1">
+                <button
+                  type="submit"
+                  className="w-full sm:flex-1 py-3.5 px-6 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-semibold text-sm border border-teal-300/30 transition-all duration-300 hover:drop-shadow-[0_0_15px_rgba(20,184,166,0.3)] flex items-center justify-center space-x-2 cursor-pointer hover:-translate-y-0.5"
+                >
+                  <Send className="w-4 h-4" />
+                  <span>Enviar Mensaje</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className={`w-full sm:w-auto py-3.5 px-5 rounded-xl font-semibold text-sm border transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer ${
+                    copied
+                      ? 'bg-emerald-500/20 border-emerald-400/60 text-emerald-300'
+                      : 'bg-slate-900/75 hover:bg-slate-800 border-slate-700 hover:border-teal-400/60 text-slate-200 hover:text-teal-300'
+                  }`}
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-4 h-4 text-emerald-400" />
+                      <span>¡Copiado!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4 text-teal-400" />
+                      <span>Copiar correo</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </section>
